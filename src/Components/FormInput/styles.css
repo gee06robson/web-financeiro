@@ -1,0 +1,38 @@
+#formInput {
+  width: 100%;
+  display: flex;
+
+  flex-direction: column;
+}
+
+#formInput label {
+  width: 100%;
+  font-weight: 500;
+  color: var(--senary);
+}
+
+#formInput span {
+  color: var(--error)
+}
+
+#formInput input {
+	background-color: var(--input);
+  border: none;
+	border-radius: 2px;
+	padding: 12px 15px;
+	margin: 8px 0;
+  width: 100%;
+  
+  font-size: 14px;
+  color: var(--gray);
+  font-weight: bold;
+  letter-spacing: 0.09857em;
+}
+
+#formInput input:read-only {
+  background-color: transparent;
+  color: var(--gray);
+  font-weight: bold;
+
+  letter-spacing: 0.09857em;
+}

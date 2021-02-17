@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+
+  font-family: 'Roboto';
+}
+
+:root {
+  --white: #FFF;
+  --sistem: #F0F0F5;
+  --primary: #303030;
+  --secondary: #2f3136;
+  --tertiary: rgb(32,34,37);
+  --quaternary: #292b2f;
+  --quinary: #393d42;
+  --senary: #828386;
+  --gray: #81a1be;
+  --link: #1a73e8;
+  --background-green:  rgb(15, 157, 88, .15);
+  --green-google: #0f9d58;
+  --background_link: #e8f0fe;
+  --error: #d93025;
+  --background_error: rgba(217, 48, 37, .15);
+
+  --input: #EEE;
+  --siafi: #29556F;
+}
+body {
+  font: 400 14px "Roboto", sans-serif;
+  background: var(--sistem);
+  background-image: linear-gradient(to bottom, var(--sistem) 0%, var(--white) 100%);
+  -webkit-font-smoothing: antialiased !important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+input[type=number]::-webkit-inner-spin-button { 
+  -webkit-appearance: none;
+  
+}
+input[type=number] { 
+ -moz-appearance: textfield;
+ appearance: textfield;
+
+}
