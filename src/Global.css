@@ -32,7 +32,7 @@
 body {
   font: 400 14px "Roboto", sans-serif;
   background: var(--sistem);
-  background-image: linear-gradient(to bottom, var(--sistem) 0%, var(--white) 100%);
+  /* background-image: linear-gradient(to bottom, var(--sistem) 0%, var(--white) 100%); */
   -webkit-font-smoothing: antialiased !important;
 }
 
