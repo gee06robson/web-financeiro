@@ -1,0 +1,33 @@
+#unity {
+  display: flex;
+  width: 100% !important;
+
+  padding: 10px 0;
+}
+
+#unity .react-select-container {
+  width: 100%;
+  cursor: pointer !important;
+}
+
+.react-select__value-container,
+.react-select__indicators {
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+#unity .react-select-container .react-select__menu .react-select__menu-list {
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px
+}
+
+#unity .react-select-container .react-select__menu .react-select__menu-list .react-select__option {
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: 'Roboto';
+  font-weight: bold;
+  color: var(--quinary);
+}

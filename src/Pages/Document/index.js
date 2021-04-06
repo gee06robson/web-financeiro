@@ -2,46 +2,56 @@ import swal from 'sweetalert'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import Notch from '../../Components/Notch'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import api from '../../Services/api'
-import { swalErrorToken } from '../../Utils/swalAlert'
 import { AiTwotonePlusCircle } from "react-icons/ai";
 import { TiArrowLeftOutline } from 'react-icons/ti'
 
 import FormInput from '../../Components/FormInput'
+import FormTextArea from '../../Components/TextArea'
+import SearchCreditor from '../../Components/Creditor'
+import User from '../../Components/User'
+import { successDocument } from '../../Utils/swalAlert'
 
 
 import './styles.css'
 const Document = () => {
-  const { register, handleSubmit, errors, formState } = useForm()
+  const { register, handleSubmit, errors, formState, reset } = useForm()
   const [documents, setDocuments] = useState([])
   const [formDocument, setFormDocument] = useState(false)
-  const history = useHistory()
   const token = localStorage.getItem('token')
-  
-  useEffect(() => {
-    api.get('/check', { headers: { authorization: token } }).then(response => {
-      console.log('Connected')
-    }).catch(err => {
-      const { data } = err.response
-      console.log(data.error)
-      swal(swalErrorToken('Ops!', data.error)).then(() => {
-        history.push('/')
-      })
-    })
-  }, [token, history])
-
 
   useEffect(() => {
-    api.get('/document', { headers: { authorization: token } }).then(response => {
+    api.get('/document', { 
+      headers: { 
+        authorization: token 
+      } 
+    }).then(response => {
       setDocuments(response.data)
+    }).catch(err => {
+      console.log(err.response)
     })
-  }, [token])
+  }, [token, formDocument])
 
   const { isSubmitting } = formState;
 
   const onSubmit = async (data) => {
-    console.log(data)
+    data.value = data.value.replace(".", "")
+    data.value = data.value.replace(",", ".")
+    data.reason = data.reason.toUpperCase()
+
+    await api.post('/document', data, {
+      headers: { 
+        authorization: token 
+      }
+    }).then(() => {
+      swal(successDocument('Sucesso', 'Documento incluido com sucesso')).then(() => {
+        reset()
+      })
+    }).catch(err => {
+      const { data } = err.response
+      console.log(data.error)
+    })
   }
 
   return (
@@ -50,6 +60,7 @@ const Document = () => {
         <Link to="/home">
           <TiArrowLeftOutline size={30} color="#2f3136" />
         </Link>
+          <User />
         <Notch />
       </div>
       <div className="content-table-document">
@@ -69,70 +80,83 @@ const Document = () => {
             <p><span>Valor</span>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(document.value)}</p>
           </div>
         ))}
-    
       </div>
 
       { formDocument && 
       <div className="new-document">
-        <div className="form-document">
-        <h3>Novo Documento</h3>
-        <span>_Fatura _Nota Fiscal</span>
+        <div className="form-document animate__animated animate__slideInDown">
           <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-            <FormInput 
-              type="text" 
-              name="number"
-              placeholder="Número Documento"
-              readOnly={isSubmitting ? true : false }
-              register={register({ required: 'Número do documento é abrigatório' })}
-              errors={errors} />
-
-            <FormInput 
-              type="text" 
-              name="emission"
-              readOnly={isSubmitting ? true : false }
-              register={register({ 
-                required: 'Emissão abrigatória',
-                minLength: {
-                  value: 10,
-                  message: 'Emissão requer 10 caracteres'
-                },
-                maxLength: {
-                  value: 10,
-                  message: 'Emissão requer 10 caracteres'
-                }
-              })}
-              errors={errors}
-              className="emission" />
+            <input name="code_unity" ref={register({ required: true })} readOnly={true} defaultValue={localStorage.getItem('code_unity')} hidden={true} />
+            <input name="code_user"  ref={register({ required: true })} readOnly={true} defaultValue={localStorage.getItem('code_user')}  hidden={true} />
             
-            <FormInput 
-              type="text" 
-              name="due"
-              readOnly={isSubmitting ? true : false }
-              register={register({ 
-                minLength: {
-                  value: 10,
-                  message: 'Vencimento requer 10 caracteres'
-                },
-                maxLength: {
-                  value: 10,
-                  message: 'Vencimento requer 10 caracteres'
-                }
-              })}
-              errors={errors}
-              className="due" />
+          <h3>Novo Documento</h3>
+          <span>_Fatura _Nota Fiscal</span>
+            <SearchCreditor register={register} errors={errors} />
+            <div className="content-input">
+              <FormInput 
+                type="number" 
+                name="number"
+                placeholder="Número Documento"
+                readOnly={isSubmitting ? true : false }
+                register={register({ required: 'Número do documento é abrigatório' })}
+                errors={errors} />
 
-            <FormInput 
-              type="text" 
-              name="value"
-              readOnly={isSubmitting ? true : false }
-              register={register({ required: 'Valor é abrigatório' })}
-              errors={errors}
-              className="money" />
+              <FormInput 
+                type="text" 
+                name="emission"
+                readOnly={isSubmitting ? true : false }
+                register={register({ 
+                  required: 'Emissão abrigatória',
+                  minLength: {
+                    value: 10,
+                    message: 'Emissão requer 10 caracteres'
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: 'Emissão requer 10 caracteres'
+                  }
+                })}
+                errors={errors}
+                className="emission" />
+              
+              <FormInput 
+                type="text" 
+                name="due"
+                readOnly={isSubmitting ? true : false }
+                register={register({ 
+                  minLength: {
+                    value: 10,
+                    message: 'Vencimento requer 10 caracteres'
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: 'Vencimento requer 10 caracteres'
+                  }
+                })}
+                errors={errors}
+                className="due" />
 
+              <FormInput 
+                type="text" 
+                name="value"
+                readOnly={isSubmitting ? true : false }
+                register={register({ required: 'Valor é abrigatório' })}
+                errors={errors}
+                className="money" />
+
+            </div>  
+              
+              <FormTextArea 
+                name="description"
+                id="description"
+                label="Descrição"
+                readOnly={isSubmitting ? true : false }
+                register={register({ required: 'Informe a descrição do material ou serviço.' })}
+                errors={errors} />
 
             <button type="submit">Cadastrar</button>
+            <div className="close" onClick={() => formDocument && setFormDocument(false) } >Fechar</div>
           </form>
-          <div className="close" onClick={() => formDocument && setFormDocument(false) } >Fechar</div>
         </div>
       </div>
       }

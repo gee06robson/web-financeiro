@@ -1,0 +1,36 @@
+#user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparent;
+  padding: 4px 10px;
+
+  border-radius: 4px;
+  align-self: center;
+
+  cursor: pointer;
+}
+
+#user p {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  font-size: 12px;
+}
+
+#user strong {
+  color: var(--senary);
+}
+
+
+#user span {
+  color: var(--gray);
+  font-weight: bold;
+  transition: color 0.6s;
+}
+
+#user:hover span {
+  color: rgba(217, 48, 37, .45);
+}

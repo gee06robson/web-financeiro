@@ -1,0 +1,31 @@
+#creditor {
+  display: flex;
+  flex-direction: column;
+}
+
+#creditor #formInput:first-child {
+  max-width: 200px;
+}
+
+#creditor #formInput:last-child { 
+  max-width: 620px;
+}
+
+#creditor #formInput span {
+  color: var(--senary);
+}
+
+#creditor div p {
+  color: var(--senary);
+  padding: 0 20px;
+  font-weight: bold;
+}
+#creditor div p::before {
+  content: 'CREDOR ';
+  color: rgba(217, 48, 37, .45);
+} 
+
+@media only screen and (max-width: 500px) {
+  #creditor #formInput:first-child { max-width: 100%; }
+  #creditor p { padding: 0; }
+}

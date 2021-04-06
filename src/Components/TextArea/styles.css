@@ -1,0 +1,41 @@
+#formTextArea {
+  width: 100%;
+  display: flex;
+
+  flex-direction: column;
+}
+
+#formTextArea label {
+  width: 100%;
+  font-weight: 500;
+  color: var(--senary);
+}
+
+#formTextArea span {
+  color: var(--error)
+}
+
+#formTextArea textarea {
+	background-color: var(--input);
+  border: none;
+	border-radius: 2px;
+	padding: 12px 15px;
+	margin: 8px 0;
+  width: 100%;
+  
+  font-size: 14px;
+  color: var(--gray);
+  font-weight: bold;
+  letter-spacing: 0.09857em;
+  resize: none;
+
+  text-transform: capitalize;
+}
+
+#formTextArea textarea:read-only {
+  background-color: transparent;
+  color: var(--gray);
+  font-weight: bold;
+
+  letter-spacing: 0.09857em;
+}

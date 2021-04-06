@@ -49,3 +49,17 @@ export const swalErrorToken = (title, message) => {
   }
 }
 
+export const successDocument = (title, message) => {
+  return {
+    icon: 'success',
+    title,
+    text: message,
+    button: {
+      text: 'Continuar'
+    },
+    closeOnClickOutside: false,
+    closeOnEsc: false,
+  }
+}
+
+

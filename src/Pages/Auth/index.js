@@ -7,10 +7,13 @@ import FormInput from '../../Components/FormInput'
 import { swalLogin, swalErrorLogin, swalSuccessLogin } from '../../Utils/swalAlert'
 
 import logo from '../../Assets/logo.svg'
+import Unity from '../../Components/Unity'
 import './styles.css'
 const Auth = () => {
-  const { register, handleSubmit, errors, formState, reset } = useForm()
+  const { register, handleSubmit, errors, formState, reset, control } = useForm()
   const history = useHistory()
+  localStorage.clear()
+
 
   const onSubmit = async (data) => {
    await swal(swalLogin('Aguarde . . .', 'Efetuando login . . .')).then(() => {
@@ -35,6 +38,7 @@ const Auth = () => {
         <div className="content">
           <h1>F I N A N C E I R O</h1>
           <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+            <Unity control={control} />
             <FormInput 
               type="number" 
               name="code"
@@ -58,6 +62,7 @@ const Auth = () => {
               readOnly={isSubmitting ? true : false }
               register={register({ required: 'Senha é obrigatória' })}
               errors={errors} />
+
             
             <button type="submit">Entrar</button>
           </form>
