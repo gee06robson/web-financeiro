@@ -8,12 +8,12 @@ const Unity = ({ control }) => {
   const [options, setOptions] = useState([])
   const [state, setState] = useState(true)
 
-  useEffect(() => {
-    api.get('/allunits').then(response => {
-      setOptions(response.data)
-      setState(false)
-    })
-  }, [])
+  // useEffect(() => {
+  //   api.get('/allunits').then(response => {
+  //     setOptions(response.data)
+  //     setState(false)
+  //   })
+  // }, [])
 
   return (
   <div id="unity">
