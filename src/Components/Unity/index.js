@@ -1,25 +1,30 @@
+import { useEffect, useState } from 'react'
 import { Controller } from  'react-hook-form'
 import Select from 'react-select'
 
 import api from '../../Services/api'
 import './styles.css'
 const Unity = ({ control }) => {
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
-  
+  const [options, setOptions] = useState([])
+  const [state, setState] = useState(true)
+
+  useEffect(() => {
+    api.get('/allunits').then(response => {
+      setOptions(response.data)
+      setState(false)
+    })
+  }, [])
+
   return (
   <div id="unity">
     <Controller
       as={Select}
       isClearable
-      // isLoading={state}
+      isLoading={state}
       className='react-select-container'
       classNamePrefix="react-select"
       name="unity"
-      options={options}
+      options={options.map(res => ({ value: res.code_unity, label: res.unity }))}
       control={control} 
       defaultValue="" 
       placeholder="Selecione uma Unidade"
