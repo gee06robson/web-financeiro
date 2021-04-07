@@ -15,6 +15,8 @@ const Unity = ({ control }) => {
     })
   }, [])
 
+  // .map(res => ({ value: res.code_unity, label: res.unity }))
+
   return (
   <div id="unity">
     <Controller
@@ -24,7 +26,7 @@ const Unity = ({ control }) => {
       className='react-select-container'
       classNamePrefix="react-select"
       name="unity"
-      options={options.map(res => ({ value: res.code_unity, label: res.unity }))}
+      options={options}
       control={control} 
       defaultValue="" 
       placeholder="Selecione uma Unidade"
