@@ -5,17 +5,18 @@ import Select from 'react-select'
 import api from '../../Services/api'
 import './styles.css'
 const Unity = ({ control }) => {
-  const [options, setOptions] = useState([{ value: '', label: '' }])
+  const [options, setOptions] = useState([])
   const [state, setState] = useState(true)
 
   useEffect(() => {
-    api.get('/allunits').then(response => {
+    api.get('/allunits', { headers: { 'Content-Type': 'application/json' }}).then(response => {
       setOptions(response.data)
       setState(false)
     })
   }, [])
 
   console.log(options)
+
   return (
   <div id="unity">
     <Controller
