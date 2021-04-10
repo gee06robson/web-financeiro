@@ -9,17 +9,10 @@ const Unity = ({ control }) => {
   const [state, setState] = useState(true)
 
   useEffect(() => {
-    api.get('/allunits', { headers: { Accept: 'application/json' }}).then(response => {
-      setOptions(response.data)
-      setState(false)
-      console.log('AQUI'+response.data)
-    }).catch(err => {
-      const { data } = err.response
-      console.log('ERRO==='+data.error)
-    })
+    console.log('Yes')
   }, [])
 
-  console.log('HTML==='+options)
+
 
   return (
   <div id="unity">
