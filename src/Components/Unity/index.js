@@ -9,7 +9,7 @@ const Unity = ({ control }) => {
   const [state, setState] = useState(true)
 
   useEffect(() => {
-    api.get('/allunits', { headers: { 'Content-Type': 'application/json' }}).then(response => {
+    api.get('/allunits', { headers: { Accept: 'application/json' }}).then(response => {
       setOptions(response.data)
       setState(false)
       console.log('AQUI'+response.data)
