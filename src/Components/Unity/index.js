@@ -12,6 +12,7 @@ const Unity = ({ control }) => {
     api.get('/allunits', { headers: { 'Content-Type': 'application/json' }}).then(response => {
       setOptions(response.data)
       setState(false)
+      console.log(response.data)
     }).catch(err => {
       console.log('ERRO==='+err)
     })
