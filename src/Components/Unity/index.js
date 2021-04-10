@@ -12,9 +12,10 @@ const Unity = ({ control }) => {
     api.get('/allunits', { headers: { 'Content-Type': 'application/json' }}).then(response => {
       setOptions(response.data)
       setState(false)
-      console.log(response.data)
+      console.log('AQUI'+response.data)
     }).catch(err => {
-      console.log('ERRO==='+err)
+      const { data } = err.response
+      console.log('ERRO==='+data.error)
     })
   }, [])
 
