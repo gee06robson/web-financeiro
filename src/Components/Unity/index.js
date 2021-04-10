@@ -12,10 +12,12 @@ const Unity = ({ control }) => {
     api.get('/allunits', { headers: { 'Content-Type': 'application/json' }}).then(response => {
       setOptions(response.data)
       setState(false)
+    }).catch(err => {
+      console.log('ERRO==='+err)
     })
   }, [])
 
-  console.log(options)
+  console.log('HTML==='+options)
 
   return (
   <div id="unity">
