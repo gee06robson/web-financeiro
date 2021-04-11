@@ -17,8 +17,8 @@
 
 #formTextArea textarea {
 	background-color: var(--input);
-  border: none;
-	border-radius: 2px;
+  border: 2px solid rgba(var(--form), .1);
+	border-radius: 6px;
 	padding: 12px 15px;
 	margin: 8px 0;
   width: 100%;
@@ -31,6 +31,11 @@
 
   text-transform: capitalize;
 }
+
+#formTextArea textarea:focus {
+  border: 2px solid rgba(var(--form-hover), .55);
+}
+
 
 #formTextArea textarea:read-only {
   background-color: transparent;

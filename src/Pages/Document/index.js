@@ -19,19 +19,20 @@ const Document = () => {
   const { register, handleSubmit, errors, formState, reset } = useForm()
   const [documents, setDocuments] = useState([])
   const [formDocument, setFormDocument] = useState(false)
+  const [count, setCount] = useState(0)
   const token = localStorage.getItem('token')
 
   useEffect(() => {
-    api.get('/document', { 
+    api.get(`/document/${localStorage.getItem('code_unity')}`, { 
       headers: { 
         authorization: token 
-      } 
+      }
     }).then(response => {
       setDocuments(response.data)
     }).catch(err => {
       console.log(err.response)
     })
-  }, [token, formDocument])
+  }, [token, formDocument, count])
 
   const { isSubmitting } = formState;
 
@@ -45,6 +46,7 @@ const Document = () => {
         authorization: token 
       }
     }).then(() => {
+      setCount(count + 1)
       swal(successDocument('Sucesso', 'Documento incluido com sucesso')).then(() => {
         reset()
       })

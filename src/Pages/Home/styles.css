@@ -11,8 +11,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid var(--white);
-  background-image: url('../../Assets/fundo.jpg');
+  border-bottom: 1px solid var(--primary);
+  background-image: url('../../Assets/fund.png');
   background-repeat: repeat;
 
   position: fixed;
@@ -35,7 +35,7 @@
   width: 94%;
   background-color: var(--white);
   position: fixed;
-  top: 66px;
+  top: 68px;
 
   border-radius: 4px;
 
@@ -161,5 +161,8 @@
   } 
   #home .content-body-home .content-card .card {
     max-width: 100%;
+  }
+  #home .content-header-home {
+    background: var(--sistem);
   }
 }

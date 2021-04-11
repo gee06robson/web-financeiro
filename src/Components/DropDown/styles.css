@@ -5,17 +5,36 @@
 
 #dropdown .menu-dropdown {
   display: flex;
-  flex-direction: column;
   position: absolute;
-  min-width: 150px;
-  max-width: 150px;
-  background-color: var(--white);
+  background-color: var(--primary);
+  background-repeat: repeat;
   cursor: pointer;
 
-  padding: 8px;
-  border-radius: 2px;
+  padding: 2px;
+  border-radius: 4px;
 
-  gap: 14px;
+  gap: 4px;
+}
+
+
+#dropdown .menu-dropdown a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  padding: 4px;
+
+  border-radius: 4px;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  gap: 4px;
+  color: var(--senary);
+}
+
+#dropdown .menu-dropdown a:hover {
+  color: var(--gray);
 }
 
 #dropdown .menu-dropdown {
@@ -24,14 +43,4 @@
   -ms-box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 0 2px rgba(0, 0, 0, 0.24);
   -o-box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 0 2px rgba(0, 0, 0, 0.24);
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 0 2px rgba(0, 0, 0, 0.24);
-}
-
-#dropdown .menu-dropdown a {
-  color: var(--senary);
-
-  font-weight: bold;
-}
-
-#dropdown .menu-dropdown a:hover {
-  color: var(--gray);
 }

@@ -15,6 +15,8 @@
   --primary: #303030;
   --secondary: #2f3136;
   --tertiary: rgb(32,34,37);
+  --form: 41, 85, 111;
+  --form-hover: 129, 161, 190;
   --quaternary: #292b2f;
   --quinary: #393d42;
   --senary: #828386;
@@ -33,7 +35,7 @@
 }
 body {
   font: 400 14px "Roboto", sans-serif;
-  background-image: url('./Assets/fundo.jpg');
+  background-image: url('./Assets/fund.png');
   background-repeat: repeat;
   /* background-image: linear-gradient(to bottom, var(--sistem) 0%, var(--white) 100%); */
   -webkit-font-smoothing: antialiased !important;
@@ -51,4 +53,10 @@ input[type=number] {
  -moz-appearance: textfield;
  appearance: textfield;
 
+}
+
+@media only screen and (max-width: 500px) {
+  body {
+    background: var(--sistem);
+  }
 }

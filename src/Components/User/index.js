@@ -13,7 +13,11 @@ const User = () => {
   const token = localStorage.getItem('token')
 
   useEffect(() => {
-    api.get('/check', {headers: { authorization: token }}).then(response => {
+    api.get('/check', {
+      headers: { 
+        authorization: token 
+      }
+    }).then(response => {
       const { sub, unity } = jwt_decode(response.data.authorization)
       setUser(sub)
       unity.map(res => localStorage.setItem('code_unity', res.codeUnity))
@@ -28,7 +32,7 @@ const User = () => {
   }, [token, history])
 
   return (
-    <div id="user">
+    <div id="user" className="animate__animated animate__fadeInDown">
       <p>
         <strong>USUÁRIO </strong>
         <span>{user.map(res => (`${res.name} ${res.lastName}`))}</span>
