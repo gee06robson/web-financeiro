@@ -17,26 +17,29 @@ const Unity = ({ control }) => {
     })
   }, [])
 
-
   return (
   <div id="unity">
     <Controller
       as={Select}
-      isClearable
       isLoading={state}
       className='react-select-container'
       classNamePrefix="react-select"
       name="unity"
-      options={options.map(res => ({ value: res.code_unity, label: res.unity }))}
+      options={options.map(res => ({ 
+        value: res.code_unity, 
+        label: res.unity 
+      }))}
       control={control} 
-      defaultValue="" 
+      defaultValue={{ 
+        value: "b15fb1d2-e4b6-4407-845c-5f01aba0ffda", 
+        label: "Selecione uma Unidade" 
+      }}
       placeholder="Selecione uma Unidade"
       styles={{
         placeholder: base => ({
           ...base,
           fontSize: '1em',
-          color: 'var(--gray)',
-          fontWeight: 'bold',
+          color: 'var(--text)',
         }),
       }} />
   </div>

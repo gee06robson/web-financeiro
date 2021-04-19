@@ -20,13 +20,13 @@ const Home = () => {
             <div className="link-header">
               <DropDownMenu name="Credor">
                 <Link to="/newcreditor">
-                  <AiTwotonePlusCircle size={36} color="#F0F0F5" />
+                  <AiTwotonePlusCircle size={26} color="#F0F0F5" />
                   <span>Novo Credor</span>
                 </Link>
               </DropDownMenu>
               <DropDownMenu name="Documento">
                 <Link to="/newdocument" >
-                  <AiTwotonePlusCircle size={36} color="#F0F0F5" />
+                  <AiTwotonePlusCircle size={26} color="#F0F0F5" />
                   <span>Novo Documento</span>
                 </Link>
               </DropDownMenu>

@@ -12,7 +12,8 @@
 }
 
 #formInput span {
-  color: var(--error)
+  color: var(--error);
+  font-size: 12px;
 }
 
 #formInput input {

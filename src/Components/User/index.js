@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import swal from 'sweetalert'
 import jwt_decode from "jwt-decode";
-import { swalErrorToken } from '../../Utils/swalAlert'
 
 import api from '../../Services/api'
 
@@ -24,10 +22,7 @@ const User = () => {
         sub.map(res => localStorage.setItem('code_user',  res.codeUser))
     }).catch(err => {
       const { data } = err.response
-      swal(swalErrorToken('Ops!', data.error)).then(() => {
-        localStorage.clear()
-        history.push('/')
-      })
+      console.log(data.error)
     })
   }, [token, history])
 

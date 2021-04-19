@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: center;
   background-color: var(--primary);
-  padding: 4px;
+  padding: 4px 6px;
 
   border-radius: 4px;
   white-space: nowrap; 
@@ -31,6 +31,8 @@
   text-transform: uppercase;
   gap: 4px;
   color: var(--senary);
+  font-size: 12px;
+  font-weight: bold;
 }
 
 #dropdown .menu-dropdown a:hover {

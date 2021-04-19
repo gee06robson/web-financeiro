@@ -1,4 +1,3 @@
-import swal from 'sweetalert'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import Notch from '../../Components/Notch'
@@ -11,7 +10,6 @@ import FormInput from '../../Components/FormInput'
 import FormTextArea from '../../Components/TextArea'
 import SearchCreditor from '../../Components/Creditor'
 import User from '../../Components/User'
-import { successDocument } from '../../Utils/swalAlert'
 
 
 import './styles.css'
@@ -47,9 +45,7 @@ const Document = () => {
       }
     }).then(() => {
       setCount(count + 1)
-      swal(successDocument('Sucesso', 'Documento incluido com sucesso')).then(() => {
-        reset()
-      })
+      reset()
     }).catch(err => {
       const { data } = err.response
       console.log(data.error)

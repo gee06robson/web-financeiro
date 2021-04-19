@@ -12,7 +12,7 @@
 :root {
   --white: #FFF;
   --sistem: #F0F0F5;
-  --primary: #303030;
+  --primary: #36393F;
   --secondary: #2f3136;
   --tertiary: rgb(32,34,37);
   --form: 41, 85, 111;
@@ -25,13 +25,20 @@
   --background-green:  rgb(15, 157, 88, .15);
   --green-google: #0f9d58;
   --background_link: #e8f0fe;
-  --error: #d93025;
+  --error: #f04747;
   --background_error: rgba(217, 48, 37, .15);
   --rocketseat: rgb(102, 51, 204);
+
+  --border: #040405;
+  --discord: #7289da;
+  --border-hover: #7289da;
+  --bt-discord: #677bc4;
+  --text: #dcddde;
 
   --input: #EEE;
   --siafi: #29556F;
   --yelow-siafi: #f4c714;
+  
 }
 body {
   font: 400 14px "Roboto", sans-serif;

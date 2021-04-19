@@ -8,6 +8,7 @@
 #unity .react-select-container {
   width: 100%;
   cursor: pointer !important;
+  
 }
 
 .react-select__value-container,
@@ -29,5 +30,31 @@
   text-transform: uppercase;
   font-family: 'Roboto';
   font-weight: bold;
-  color: var(--quinary);
+  color: var(--primary);
+}
+
+#auth .container .content form #unity .react-select-container .react-select__control {
+  background-color: transparent;
+  
+  background-color: transparent;
+  border: 1px solid var(--border-hover);
+  color: var(--text);
+
+  border-radius: 3px;
+  box-sizing: border-box;
+  font-weight: 400;
+
+  box-shadow: none;
+  height: 43px;
+}
+
+#auth .container .content form #unity .react-select-container .react-select__control .react-select__single-value {
+  color: var(--text);
+}
+
+@media only screen and (max-width: 800px) {
+  #auth .container .content form #unity .react-select-container .react-select__control,
+  #auth .container .content form #unity .react-select-container .react-select__control .react-select__single-value {
+    color: var(--primary);
+  }
 }

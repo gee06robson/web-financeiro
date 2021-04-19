@@ -4,6 +4,7 @@ import App from './App';
 
 import './Global.css'
 import 'animate.css'
+import './Swal.css'
 
 ReactDOM.render(
   <React.StrictMode>
