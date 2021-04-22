@@ -3,17 +3,19 @@ import { useEffect, useState } from 'react'
 import Notch from '../../Components/Notch'
 import { Link } from 'react-router-dom'
 import api from '../../Services/api'
-import { AiTwotonePlusCircle } from "react-icons/ai";
+import { AiTwotonePlusCircle } from 'react-icons/ai'
 import { TiArrowLeftOutline } from 'react-icons/ti'
-
 import FormInput from '../../Components/FormInput'
 import FormTextArea from '../../Components/TextArea'
 import SearchCreditor from '../../Components/Creditor'
 import User from '../../Components/User'
-
-
+import Load from '../../Components/Load'
 import './styles.css'
+
+
 const Document = () => {
+  const [resReq, setResReq] = useState(false)
+  const [loading, setLoading] = useState(true)
   const { register, handleSubmit, errors, formState, reset } = useForm()
   const [documents, setDocuments] = useState([])
   const [formDocument, setFormDocument] = useState(false)
@@ -27,6 +29,7 @@ const Document = () => {
       }
     }).then(response => {
       setDocuments(response.data)
+      setLoading(false)
     }).catch(err => {
       console.log(err.response)
     })
@@ -35,6 +38,8 @@ const Document = () => {
   const { isSubmitting } = formState;
 
   const onSubmit = async (data) => {
+    setLoading(true)
+    setResReq(false)
     data.value = data.value.replace(".", "")
     data.value = data.value.replace(",", ".")
     data.reason = data.reason.toUpperCase()
@@ -44,11 +49,15 @@ const Document = () => {
         authorization: token 
       }
     }).then(() => {
-      setCount(count + 1)
+      setTimeout(() => {
+        setCount(count + 1)
+        setFormDocument(false)
+      }, 2000)
       reset()
     }).catch(err => {
       const { data } = err.response
-      console.log(data.error)
+      setLoading(false)
+      setResReq(data.error)
     })
   }
 
@@ -61,12 +70,12 @@ const Document = () => {
           <User />
         <Notch />
       </div>
-      <div className="content-table-document">
 
-      <div className="card-new-document" onClick={() => formDocument ? setFormDocument(false) : setFormDocument(true)}>
-        <AiTwotonePlusCircle size={86} color="#2f3136" />
-        <span>Novo Documento</span>
-      </div>
+      <div className="content-table-document">
+        <div className="card-new-document" onClick={() => formDocument ? setFormDocument(false) : setFormDocument(true)}>
+          <AiTwotonePlusCircle size={86} color="#2f3136" />
+          <span>Novo Documento</span>
+        </div>
         {documents.map(document => (
           <div className="card-document" key={document.id}>
             <h1>{document.number}</h1>
@@ -76,8 +85,7 @@ const Document = () => {
             <p><span>Emissão</span>{document.emission}</p>
             {document.due && <p><span>Vencimento</span>{document.due}</p> }
             <p><span>Valor</span>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(document.value)}</p>
-          </div>
-        ))}
+          </div>))}
       </div>
 
       { formDocument && 
@@ -89,6 +97,7 @@ const Document = () => {
             
           <h3>Novo Documento</h3>
           <span>_Fatura _Nota Fiscal</span>
+          { resReq && <span className="response-req" >{resReq}</span> }
             <SearchCreditor register={register} errors={errors} />
             <div className="content-input">
               <FormInput 
@@ -156,8 +165,8 @@ const Document = () => {
             <div className="close" onClick={() => formDocument && setFormDocument(false) } >Fechar</div>
           </form>
         </div>
-      </div>
-      }
+      </div>}
+      <Load state={loading} />
     </div>
   )
 }

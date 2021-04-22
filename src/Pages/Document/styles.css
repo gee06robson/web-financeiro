@@ -1,9 +1,10 @@
 #document {
   width: 100%;
+  height: 100vh;
   display: flex;
-  justify-content: center;
   align-self: center;
   flex-direction: column;
+  overflow: auto;
 }
 
 #document .header-document {
@@ -41,6 +42,8 @@
   justify-content: space-between;
   align-content: space-around;
   flex-wrap: wrap;
+
+  position: relative;
 }
 
 #document .content-table-document .card-new-document,
@@ -142,24 +145,23 @@
 #document .new-document {
   position: absolute;
   width: 100%;
+  height: calc(100% - 61px);
   display: flex;
   justify-content: space-between;
-  background-color: transparent;
 
-  top: 61px;
+  top: 60px;
   bottom: 0;
-  padding: 1px;
 }
 
 #document .new-document .form-document {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 
   position: fixed;
   background-color: var(--white);
 }
-
 
 #document .new-document .form-document h3,
 #document .new-document .form-document span {
@@ -183,6 +185,23 @@
 
   border-radius: 4px;
 }
+
+#document .new-document .form-document form .response-req {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--discord);
+  font-size: 14px;
+  background-color: rgba(var(--discor-rgba), 0.2);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+
+  margin: 6px 0;
+  border: 1px solid rgba(var(--discor-rgba), 0.4);
+} 
+
 #document .new-document .form-document form .content-input {
   width: 100%;
   display: flex;
@@ -239,6 +258,14 @@
   -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#document .new-document .form-document form .response-req {
+  -webkit-box-shadow: 0 0 10px rgba(var(--discor-rgba), .12), 0 0 10px rgba(var(--discor-rgba), .24);
+  -moz-box-shadow: 0 0 10px rgba(var(--discor-rgba), .12), 0 0 10px rgba(var(--discor-rgba), .24);
+  -ms-box-shadow: 0 0 10px rgba(var(--discor-rgba), .12), 0 0 10px rgba(var(--discor-rgba), .24);
+  -o-box-shadow: 0 0 10px rgba(var(--discor-rgba), .12), 0 0 10px rgba(var(--discor-rgba), .24);
+  box-shadow: 0 0 10px rgba(var(--discor-rgba), .12), 0 0 10px rgba(var(--discor-rgba), .24);
 }
 
 @media only screen and (max-width: 500px) {

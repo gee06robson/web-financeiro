@@ -2,10 +2,12 @@ import Notch from '../../Components/Notch'
 import { Link } from 'react-router-dom'
 import { AiTwotonePlusCircle } from "react-icons/ai";
 import User from '../../Components/User'
+import DropDownMenu from '../../Components/DropDown'
 import './styles.css'
 
-import DropDownMenu from '../../Components/DropDown'
+
 const Home = () => {
+
   return (
     <div id="home">
       <div className="content-header-home" >

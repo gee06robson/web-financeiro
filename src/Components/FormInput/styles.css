@@ -34,10 +34,10 @@
   border: 2px solid rgba(var(--form-hover), .55);
 }
 
-#formInput input:read-only {
+/* #formInput input:read-only {
   background-color: transparent;
   color: var(--gray);
   font-weight: bold;
 
   letter-spacing: 0.09857em;
-}
+} */

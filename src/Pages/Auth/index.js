@@ -1,43 +1,35 @@
-import { useRef } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import api from '../../Services/api'
-
 import FormInput from '../../Components/FormInput'
-import { progressLogin, errorLogin } from '../../Utils/toastify'
-
 import logo from '../../Assets/fundo.canto.png'
 import logoInicio from '../../Assets/new-logo.png'
 import Unity from '../../Components/Unity'
+import Load from "../../Components/Load"
 import './styles.css'
-import 'react-toastify/dist/ReactToastify.css';
+
+
 const Auth = () => {
-  const toastId = useRef(null);
+  const [loading, setLoading] = useState(false)
+  const [resReq, setResReq] = useState('')
   const { register, handleSubmit, errors, formState, control } = useForm()
   const history = useHistory()
           localStorage.clear()
 
   const onSubmit = async (data) => {
-
-    await api.post('/login', data, {
-      onUploadProgress: p => {
-        let progress = Math.round((p.loaded * 100) / p.total)
-
-        if(toastId.current === null){
-          toastId.current = toast.dark('Efetuando login', progressLogin(progress))
-        } else {
-          toast.update(toastId.current, progressLogin(progress))
-        }
-      }
-    }).then(res => {
-      toast.done(toastId.current);
-      localStorage.setItem('token', res.data.token)
-      history.push('/home')
+    setResReq(false)
+    setLoading(true)
+    await api.post('/login', data).then(res => {
+      setTimeout(() => {
+        setLoading(false)
+        localStorage.setItem('token', res.data.token)
+        history.push('/home')
+      },1500)
     }).catch(err => {
       const { data } = err.response
-      toast.dismiss(toastId.current)
-      toast.error(data.error, errorLogin())
+      setLoading(false)
+      setResReq( data.error)
     })
   }
 
@@ -48,9 +40,14 @@ const Auth = () => {
       <div className="container">
 
         <div className="content">
+          
+          {loading && <Load state={loading} />}
+
           <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>  
             <div className="title">Olá, seja bem vindo!</div>
-            <div className="sub-title">Preencha os dados abaixo para logar</div>
+            <div className="sub-title">
+              {resReq ? <span>{resReq}</span> : 'Preencha os dados abaixo para logar'}
+            </div>
 
             <Unity control={control} />
             <FormInput 
@@ -100,7 +97,6 @@ const Auth = () => {
       <div className="logo">
         <img src={logo} alt="Financeiro"/>
       </div>
-      <ToastContainer />
     </div>
   )
 }
