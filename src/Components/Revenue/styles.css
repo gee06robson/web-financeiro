@@ -1,0 +1,178 @@
+#revenue {
+  width: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#revenue .content-revenue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 10px;
+
+  width: 100%;
+  max-width: 600px;
+  min-width: 400px;
+
+  padding: 2px;
+
+  background-color: var(--white);
+  box-shadow:0px 0px 10px 3px rgba(0,0,0,0.1);
+  border: 1px solid rgba(var(--discor-rgba), 0.4);
+  border-radius: 4px;
+  
+  position: relative;
+
+}
+
+#revenue .content-revenue .content-data-revenue {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  background-color: var(--white);
+  border: 1px solid rgba(var(--discor-rgba), .34);
+  border-radius: 3px;
+
+  padding: 4px;
+
+  gap: 4px;
+}
+
+#revenue .content-revenue .content-data-revenue .retentions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 10% 20% 30% 30% 10%;
+
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--white);
+  border: 1px solid rgba(var(--discor-rgba), .34);
+  border-radius: 3px;
+
+  padding: 10px 20px;
+}
+
+#revenue .content-revenue .content-data-revenue .retentions span {
+  font-weight: bold;
+  color: var(--senary);
+
+  align-self: center;
+}
+
+#revenue .content-revenue .content-data-revenue .retentions span:nth-child(1) { color: var(--green-google);}
+
+#revenue .content-revenue .content-data-revenue .retentions span:nth-child(2) { color: var(--link); }
+
+#revenue .content-revenue .content-data-revenue .retentions span:nth-child(4) { color: var(--error); }
+
+#revenue .content-revenue .content-data-revenue .retentions span:nth-child(5) { 
+  text-align: center;
+  cursor: pointer;
+
+  transition: color 0.5s ease;
+}
+
+#revenue .content-revenue .content-data-revenue .retentions span:nth-child(5):hover {
+  color: rgba(var(--discor-rgba), .54);
+}
+
+#revenue .content-revenue .content-data-revenue .content-calculation {
+  width: 100%;
+  display: flex;
+
+  background-color: rgba(var(--discor-rgba), 0.2);
+  border: 1px solid rgba(var(--discor-rgba), .34);
+  border-radius: 3px;
+
+  padding: 10px 20px;
+
+  gap: 10px;
+}
+
+#revenue .content-revenue .content-data-revenue .content-calculation span {
+  font-weight: bold;
+  color: var(--senary);
+}
+
+#revenue .content-revenue .content-data-revenue .content-calculation span:nth-child(2) { color: var(--green-google); }
+#revenue .content-revenue .content-data-revenue .content-calculation span:nth-child(4) { color: var(--error); }
+#revenue .content-revenue .content-data-revenue .content-calculation span:nth-child(6) { color: var(--link); }
+
+#revenue .content-revenue form {
+  width: 100%;
+}
+
+#revenue .content-revenue form .content-form {
+  width: 100%;
+  display: grid;
+  justify-content: space-between;
+  gap: 2px;
+  
+  grid-template-columns: repeat(4, 24% [col-start]);
+  
+}
+
+#revenue .content-revenue form .content-form button {
+  width: 100%;
+  height: 45px;
+
+  line-height: 24px;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+
+  padding: 2px 16px;
+
+  background-image: var(--background-primary);
+  color: var(--quinary);
+
+  text-transform: uppercase;
+
+  border-radius: 4px;
+  cursor: pointer;
+
+  transition: background-color 0.5s ease, color 0.5s ease;
+
+  align-self: flex-start;
+}
+
+#revenue .content-revenue form .content-form button:hover {
+  color: var(--text);
+}
+
+#revenue .content-revenue form .content-form button:disabled {
+  color: var(--primary);
+  background-image: var(--background-primary-hover);
+}
+
+#revenue .content-revenue form .content-form button:disabled:hover {
+  background-image: var(--background-primary-hover);
+}
+
+#revenue .content-revenue form  .content-form #formInput {
+  width: 100%;
+  align-self: flex-start;
+}
+
+#revenue .content-revenue form  .content-form #formInput input {
+  margin: 0px;
+  border-radius: 4px;
+}
+
+#revenue .content-revenue,
+#revenue .content-revenue .content-data-revenue,
+#revenue .content-revenue .content-data-revenue .retentions,
+#revenue .content-revenue .content-data-revenue .content-calculation {
+  -webkit-box-shadow: 0 0 4px rgba(var(--discor-rgba), .12), 0 0 4px rgba(var(--discor-rgba), .24);
+  -moz-box-shadow: 0 0 4px rgba(var(--discor-rgba), .12), 0 0 4px rgba(var(--discor-rgba), .24);
+  -ms-box-shadow: 0 0 4px rgba(var(--discor-rgba), .12), 0 0 4px rgba(var(--discor-rgba), .24);
+  -o-box-shadow: 0 0 4px rgba(var(--discor-rgba), .12), 0 0 4px rgba(var(--discor-rgba), .24);
+  box-shadow: 0 0 4px rgba(var(--discor-rgba), .12), 0 0 4px rgba(var(--discor-rgba), .24);
+}

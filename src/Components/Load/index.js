@@ -9,7 +9,7 @@ const Loading = ({state}) => {
   if (state === true) {
     return (  
       <div id="loading">
-          <MetroSpinner size={30} color="var(--discord)" loading={loading.current} />
+        <MetroSpinner size={30} color="var(--discord)" loading={loading.current} />
       </div>
     )
   } else {

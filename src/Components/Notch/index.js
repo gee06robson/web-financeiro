@@ -11,10 +11,10 @@ const Notch = () => {
         authorization: token 
       } 
     }).then(() => {
+      localStorage.clear()
       history.push('/')
     }).catch(err => {
-      const { data } = err.response
-      console.log(data.error)
+      // const { data } = err.response
       localStorage.removeItem('token')
       history.push('/')
     })

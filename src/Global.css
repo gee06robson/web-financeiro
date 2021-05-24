@@ -13,6 +13,7 @@
   --white: #FFF;
   --sistem: #F0F0F5;
   --primary: #36393F;
+  --rgba-primary: 54, 57, 63;
   --secondary: #2f3136;
   --tertiary: rgb(32,34,37);
   --form: 41, 85, 111;
@@ -34,19 +35,27 @@
   --discord: #7289da;
   --border-hover: #7289da;
   --discor-rgba: 114, 137, 218;
+  --olive-green: 85, 107, 47;
+  --brown-olive-green: #6b8e23;
+  --olive: #808000;
   --bt-discord: #677bc4;
   --text: #dcddde;
+  --text-yelow: 244, 199, 20;
 
   --input: #EEE;
   --siafi: #29556F;
   --yelow-siafi: #f4c714;
-  
+
+  --background-primary: linear-gradient(to top, #505285 0%, #b5aee4 100%);
+  --background-primary-hover: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
+
+  --background-secondary: linear-gradient(to right, #434343 0%, black 100%);
 }
 body {
   font: 400 14px "Roboto", sans-serif;
   background-image: url('./Assets/fund.png');
   background-repeat: repeat;
-  /* background-image: linear-gradient(to bottom, var(--sistem) 0%, var(--white) 100%); */
+
   -webkit-font-smoothing: antialiased !important;
   overflow: hidden;
 }

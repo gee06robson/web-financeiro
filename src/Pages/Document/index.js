@@ -1,15 +1,16 @@
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import Notch from '../../Components/Notch'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import api from '../../Services/api'
 import { AiTwotonePlusCircle } from 'react-icons/ai'
 import { TiArrowLeftOutline } from 'react-icons/ti'
 import FormInput from '../../Components/FormInput'
 import FormTextArea from '../../Components/TextArea'
 import SearchCreditor from '../../Components/Creditor'
+import { toConvert, dealWithData } from '../../Utils/dateFormat'
 import User from '../../Components/User'
-import Load from '../../Components/Load'
+import { RotateSpinner } from "react-spinners-kit"
 import './styles.css'
 
 
@@ -21,6 +22,7 @@ const Document = () => {
   const [formDocument, setFormDocument] = useState(false)
   const [count, setCount] = useState(0)
   const token = localStorage.getItem('token')
+  const history = useHistory()
 
   useEffect(() => {
     api.get(`/document/${localStorage.getItem('code_unity')}`, { 
@@ -28,36 +30,41 @@ const Document = () => {
         authorization: token 
       }
     }).then(response => {
-      setDocuments(response.data)
-      setLoading(false)
-    }).catch(err => {
-      console.log(err.response)
+      setTimeout(() => {
+        setDocuments(response.data)
+        setLoading(false)
+      }, 1500)
+    }).catch(() => {
+      localStorage.removeItem('token')
+      history.push('/')
     })
-  }, [token, formDocument, count])
+  }, [token, formDocument, count, history])
 
   const { isSubmitting } = formState;
 
   const onSubmit = async (data) => {
     setLoading(true)
     setResReq(false)
-    data.value = data.value.replace(".", "")
-    data.value = data.value.replace(",", ".")
-    data.reason = data.reason.toUpperCase()
-
-    await api.post('/document', data, {
-      headers: { 
-        authorization: token 
-      }
-    }).then(() => {
-      setTimeout(() => {
-        setCount(count + 1)
-        setFormDocument(false)
-      }, 2000)
-      reset()
+    await dealWithData(data).then(res => {
+      api.post('/document', res, {
+        headers: { 
+          authorization: token 
+        }
+      }).then(() => {
+        setTimeout(() => {
+          setCount(count + 1)
+          setFormDocument(false)
+        }, 2000)
+        reset()
+      }).catch(err => {
+        const { data } = err.response
+        setLoading(false)
+        setResReq(data.error)
+      })
     }).catch(err => {
-      const { data } = err.response
       setLoading(false)
-      setResReq(data.error)
+      setResReq('Erro ao enviar os dados ao servidor, (verifique o console)')
+      console.log(err)
     })
   }
 
@@ -72,22 +79,37 @@ const Document = () => {
       </div>
 
       <div className="content-table-document">
-        <div className="card-new-document" onClick={() => formDocument ? setFormDocument(false) : setFormDocument(true)}>
-          <AiTwotonePlusCircle size={86} color="#2f3136" />
-          <span>Novo Documento</span>
+        
+        <div className="new-documewnt">
+          <div className="card-new-document" onClick={() => formDocument ? setFormDocument(false) : setFormDocument(true)}>
+            <AiTwotonePlusCircle size={86} color="#2f3136" />
+            <span>Novo Documento</span>
+          </div>
         </div>
-        {documents.map(document => (
-          <div className="card-document" key={document.id}>
-            <h1>{document.number}</h1>
-            <b>{document.creditor.reason}</b>
-            <b>{document.creditor.code}</b>
-            <p><span>Número</span>{document.number}</p>
-            <p><span>Emissão</span>{document.emission}</p>
-            {document.due && <p><span>Vencimento</span>{document.due}</p> }
-            <p><span>Valor</span>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(document.value)}</p>
-          </div>))}
-      </div>
 
+        <div className="documents">
+          {documents.map(document => (
+            <div className="card-document" key={document.id}>
+              <h1>{document.number}</h1>
+              <b>{document.creditor.reason}</b>
+              <b>{document.creditor.code}</b>
+              <p><span>Número</span>{document.number}</p>
+              <p><span>Emissão</span>{toConvert(document.emission)}</p>
+              {document.due && <p><span>Vencimento</span>{toConvert(document.due)}</p> }
+              <p><span>Valor</span>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(document.value)}</p>
+              <Link to={`/update/${document.id}`}></Link>
+            </div>))}
+        </div>
+
+        {loading && 
+        <div className="loading">
+          <div className="content-loading">
+            <RotateSpinner size={30} color="var(--discord)" loading={loading.current} />
+            <span> Carregando </span>
+          </div>
+        </div>}
+
+      </div>
       { formDocument && 
       <div className="new-document">
         <div className="form-document animate__animated animate__slideInDown">
@@ -125,7 +147,7 @@ const Document = () => {
                 })}
                 errors={errors}
                 className="emission" />
-              
+
               <FormInput 
                 type="text" 
                 name="due"
@@ -161,12 +183,11 @@ const Document = () => {
                 register={register({ required: 'Informe a descrição do material ou serviço.' })}
                 errors={errors} />
 
-            <button type="submit">Cadastrar</button>
+            <button type="submit" disabled={loading} >{loading ? 'Carregando . . .':'CADASTRAR'}</button>
             <div className="close" onClick={() => formDocument && setFormDocument(false) } >Fechar</div>
           </form>
         </div>
       </div>}
-      <Load state={loading} />
     </div>
   )
 }

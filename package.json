@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.1.10",
     "animate.css": "^4.1.1",
     "axios": "^0.21.0",
+    "date-fns": "^2.21.2",
     "dateformat": "^4.4.1",
     "jquery": "^3.5.1",
     "jquery-mask-plugin": "^1.14.16",

@@ -38,6 +38,10 @@ const Home = () => {
           </div>
         </div>
 
+        <div className="content-sub-header animate__animated animate__fadeInDown">
+          <Link to="newdocument">Novo Documento</Link>
+        </div>
+
       </div>
     </div>
   )

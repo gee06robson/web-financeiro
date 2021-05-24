@@ -21,6 +21,10 @@
   top: 0;
 }
 
+#document .header-document #user {
+ box-shadow: none;
+}
+
 #document .header-document a {
   color: var(--siafi);
   font-weight: bold;
@@ -39,21 +43,78 @@
   padding: 20px 10px;
   padding-top: 70px;
 
-  justify-content: space-between;
-  align-content: space-around;
-  flex-wrap: wrap;
-
   position: relative;
 }
 
+#document .content-table-document .new-documewnt {
+  display: flex;
+  flex-direction: column;
+}
+
+#document .content-table-document .documents {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  padding: 0 10px;
+
+  border-left: 1px solid var(--senary);
+}
+
+#document .content-table-document .loading {
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  top: 0px;
+  left: 0px;
+
+  width: 100%;
+  height: 100%;
+}
+
+#document .content-table-document .loading .content-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  gap: 10px;
+  
+  padding: 20px;
+
+  background-color: var(--white);
+
+  border-radius: 4px;
+  border: 1px solid rgba(var(--discor-rgba), .34);
+}
+
+#document .content-table-document .loading .content-loading span  {
+  color: var(--text);
+  
+  font-weight: bold;
+  
+  padding: 1px 10px;
+  background-image: var(--background-primary);
+  border-radius: 4px;
+
+  font-size: 11px;
+}
+
 #document .content-table-document .card-new-document,
-#document .content-table-document .card-document {
+#document .content-table-document .documents .card-document {
   display: flex;
   flex-direction: column;
   background-color: var(--white);
 	border-radius: 4px;
   width: 100%;
   max-width: 250px;
+  min-width: 250px;
   padding: 10px;
 
   text-transform: uppercase;
@@ -64,6 +125,7 @@
 
   position: relative;
 }
+
 
 #document .content-table-document .card-new-document {
   justify-content: center;
@@ -77,30 +139,61 @@
   font-weight: bold;
 }
 
-#document .content-table-document .card-document::before {
+#document .content-table-document .documents .card-document a {
   position: absolute;
-  content: '';
-  padding: 10px;
+
+  height: 20px;
+  width: 20px;
+  padding: 0;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   background-color: var(--secondary);
+  color: var(--discord);
   transition: background-color 0.9s;
   border-radius: 50%;
 
   right: 10px;
   top: 10px;
+
+  transition: width .5s, border-radius .5s;
+
+  font-weight: bold;
 }
-#document .content-table-document .card-document:hover::before {
+
+#document .content-table-document .documents .card-document:hover a {
+  width: 60px;
   background-color: var(--white);
+  border-radius: 12px;
 }
-#document .content-table-document .card-document:hover {
+
+#document .content-table-document .documents .card-document:hover a::before {
+  content: 'Editar';
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  padding: 4px 10px; 
+  
+  font-size: 11px;
+  text-transform: capitalize;
+  
+  position: absolute;
+  text-transform: uppercase;
+}
+
+#document .content-table-document .documents .card-document:hover {
   background-color: var(--secondary);
 }
 
-#document .content-table-document .card-document:hover h1 {
+#document .content-table-document .documents .card-document:hover h1 {
   color: var(--sistem);
   transition: 0.9s;
 }
-#document .content-table-document .card-document h1 {
+#document .content-table-document .documents .card-document h1 {
   color: var(--siafi);
   font-size: 46px;
   width: 220px;
@@ -112,7 +205,7 @@
 }
 
 
-#document .content-table-document .card-document b {
+#document .content-table-document .documents .card-document b {
   width: 100%;
   white-space: nowrap; 
   overflow: hidden;
@@ -121,13 +214,14 @@
   color: var(--senary);
 }
 
-#document .content-table-document .card-document b + p {
+#document .content-table-document .documents .card-document b + p {
   margin-top: 10px;
 }
-#document .content-table-document .card-document span {
-  color: #e2c028;
+#document .content-table-document .documents .card-document span {
+  color: var(--discord);
+  font-weight: bold;
 }
-#document .content-table-document .card-document p {
+#document .content-table-document .documents .card-document p {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -136,7 +230,7 @@
   color: var(--gray);
 }
 
-#document .content-table-document .card-document p, span, b{
+#document .content-table-document .documents .card-document p, span, b{
   letter-spacing: 0.09857em
 }
 
@@ -220,19 +314,35 @@
 
 
 #document .new-document .form-document form button {
+  width: 100%;
   max-width: 200px;
-	border-radius: 2px;
-	border: 1px solid var(--senary);
-	background-color: var(--senary);
-	color: var(--white);
-	font-size: 12px;
-	font-weight: bold;
-	padding: 12px 45px;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	cursor: pointer;
+  height: 44px;
 
-  margin: 20px 0;
+  line-height: 24px;
+
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-weight: 500;
+  font-size: 14px;
+  border: 2px solid rgba(var(--discor-rgba), .15);
+
+  padding: 2px 16px;
+
+  background-color: rgba(var(--discor-rgba), 0.45);
+  color: var(--discord);
+
+  text-transform: uppercase;
+
+  border-radius: 4px;
+  cursor: pointer;
+
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+#document .new-document .form-document form button:hover {
+  border: 1px solid rgba(var(--discor-rgba), .55);
+  background-color: rgba(var(--discor-rgba), 0.70);
+  color: var(--white);
 }
 
 #document .new-document .form-document .close {
@@ -252,7 +362,7 @@
 #document .new-document .form-document,
 #document .header-document,
 #document .content-table-document .card-new-document,
-#document .content-table-document .card-document {
+#document .content-table-document .documents .card-document {
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -260,6 +370,7 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
+#document .content-table-document .loading .content-loading,
 #document .new-document .form-document form .response-req {
   -webkit-box-shadow: 0 0 10px rgba(var(--discor-rgba), .12), 0 0 10px rgba(var(--discor-rgba), .24);
   -moz-box-shadow: 0 0 10px rgba(var(--discor-rgba), .12), 0 0 10px rgba(var(--discor-rgba), .24);
@@ -268,11 +379,25 @@
   box-shadow: 0 0 10px rgba(var(--discor-rgba), .12), 0 0 10px rgba(var(--discor-rgba), .24);
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 800px) {
+  #document .content-table-document {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #document .content-table-document .documents {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    padding: 0;
+    border: none;
+  }
   #document .content-table-document .card-new-document,
-  #document .content-table-document .card-document,
-  #document .content-table-document .card-document h1,
-  #document .content-table-document .card-document b,
+  #document .content-table-document .documents .card-document,
+  #document .content-table-document .documents .card-document h1,
+  #document .content-table-document .documents .card-document b,
   #document .new-document .form-document form button,
   #document .new-document .form-document form .content-input #formInput {
     width: 100%;
