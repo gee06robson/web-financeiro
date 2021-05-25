@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import api from '../../Services/api'
 import FormInput from '../../Components/FormInput'
-import logo from '../../Assets/fundo.canto.png'
 import logoInicio from '../../Assets/new-logo.png'
 import Unity from '../../Components/Unity'
 import Load from "../../Components/Load"
@@ -44,15 +43,16 @@ const Auth = () => {
           {loading && <Load state={loading} />}
 
           <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>  
-            <div className="title">Olá, seja bem vindo!</div>
+            <div className="title">Boas-vindas de volta!</div>
             <div className="sub-title">
-              {resReq ? <span>{resReq}</span> : 'Preencha os dados abaixo para logar'}
+              {resReq ? <span>{resReq}</span> : 'Estamos muito animados em te ver novamente!'}
             </div>
 
             <Unity control={control} />
             <FormInput 
               type="number" 
               name="code"
+              className="login-input"
               placeholder="CPF OU E-MAIL"
               readOnly={isSubmitting ? true : false }
               register={register({
@@ -69,6 +69,7 @@ const Auth = () => {
 
             <FormInput 
               type="password" 
+              className="login-input"
               name="password"
               placeholder="SENHA"
               readOnly={isSubmitting ? true : false }
@@ -78,7 +79,9 @@ const Auth = () => {
             <Link to="/">Esqueceu a senha?</Link>
 
             
-            <button type="submit">Entrar</button>
+            <button type="submit">
+              <div>Entrar</div>
+            </button>
             <div className="register">
               <span>Precisando de uma conta? </span>
               <Link to="/">Cadastre-se</Link>
@@ -93,9 +96,6 @@ const Auth = () => {
 
         </div>
         
-      </div>
-      <div className="logo">
-        <img src={logo} alt="Financeiro"/>
       </div>
     </div>
   )

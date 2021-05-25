@@ -34,18 +34,22 @@
 }
 
 #auth .container .content form #unity .react-select-container .react-select__control {
-  background-color: transparent;
-  
-  background-color: transparent;
-  border: 1px solid var(--border-hover);
+  background-color: rgba(0, 0, 0, .1);
+  border: 1px solid rgba(0, 0, 0, .3);
   color: var(--text);
 
   border-radius: 3px;
   box-sizing: border-box;
-  font-weight: 400;
+  font-weight: 600;
+  font-size: 12px;
 
   box-shadow: none;
   height: 43px;
+  transition: border-color .2s ease-in-out;
+}
+
+#auth .container .content form #unity .react-select-container .react-select__control:hover {
+  border-color: var(--focus-primary);
 }
 
 #auth .container .content form #unity .react-select-container .react-select__control .react-select__single-value {

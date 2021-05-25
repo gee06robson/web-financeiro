@@ -4,6 +4,7 @@ import FormInput from '../../Components/FormInput'
 import { useParams } from 'react-router-dom'
 import { handleRetention } from '../../Utils/dateFormat'
 import { dealWithToken } from '../../Utils/dealWithToken'
+import { RotateSpinner } from 'react-spinners-kit'
 import api from '../../Services/api'
 import $ from 'jquery'
 import 'jquery-mask-plugin/dist/jquery.mask.min'
@@ -13,6 +14,7 @@ export const Revenue = () => {
   const { register, handleSubmit, errors, formState, reset } = useForm()
   const { id } = useParams()
   const [document, setDocument] = useState([])
+  const [loading, setLoading] = useState(true)
   const [count, setCount] = useState(0)
   const code_unity = localStorage.getItem('code_unity')
   const token = localStorage.getItem('token')
@@ -23,16 +25,23 @@ export const Revenue = () => {
       id, 
       code_unity 
     }, dealWithToken(token)).then(res => {
-      setDocument([res.data])
-      $('.money').unmask()
+      setTimeout(() => {
+        setLoading(false)
+        setDocument([res.data])
+        $('.money').unmask()
+      }, 1500)
     }).catch(err => {
       const { data } = err.response
       console.log(data.error)
+      setLoading(false)
       setDocument([])
     })
   }, [id, code_unity, token, count, reset])
 
   const onSubmit = async (data) => {
+
+    setLoading(true)
+
     await handleRetention(data).then(data => {
       api.post('/apply_tax', data, dealWithToken(token)).then(() => {
         reset()
@@ -40,16 +49,23 @@ export const Revenue = () => {
         $('.money').unmask()
       }).catch(err => {
         console.log(err)
+        setLoading(false)
       })
     }).catch(err => {
       console.log(err)
+      setLoading(false)
     })
+
   }
 
   async function removeReceita(document, retention) {
+
+    setLoading(true)
+
     await api.delete(`/delete_taxes/${document}/${retention}`, dealWithToken(token)).then(() => {
       setCount(count + 1)
     })
+
   }
 
   return (
@@ -117,6 +133,7 @@ export const Revenue = () => {
 
           </div>
         </form>
+        {loading && <RotateSpinner size={18} color="var(--discord)" /> }
         <div className="content-data-revenue">
           {document.map(document => (
             document.retentions.map(receita => (

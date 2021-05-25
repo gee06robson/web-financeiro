@@ -1,12 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@font-face { font-family: Ginto; src: url("./Assets/Fontes/88055567e3d928bcb1e67e967081572e.woff") format("woff"); font-weight: 600; }
+
+@font-face { font-family: Whitney; src: url("./Assets/Fontes/e8acd7d9bf6207f99350ca9f9e23b168.woff") format("woff"); font-weight: 400; }
+@font-face { font-family: Whitney; src: url("./Assets/Fontes/3bdef1251a424500c1b3a78dea9b7e57.woff") format("woff"); font-weight: 500; }
+@font-face { font-family: Whitney; src: url("./Assets/Fontes/be0060dafb7a0e31d2a1ca17c0708636.woff") format("woff"); font-weight: 600; }
+
 * {
   margin: 0;
   padding: 0;
   outline: 0;
   box-sizing: border-box;
-
-  font-family: 'Roboto';
+  font-family: Whitney;
 }
 
 :root {
@@ -38,13 +43,16 @@
   --olive-green: 85, 107, 47;
   --brown-olive-green: #6b8e23;
   --olive: #808000;
-  --bt-discord: #677bc4;
-  --text: #dcddde;
+  --bt-discord: #4752c4;
+  --text: #b9bbbe;
   --text-yelow: 244, 199, 20;
+  --text-normal: #dcddde;
+  --channels-default: #8e9297;
 
   --input: #EEE;
   --siafi: #29556F;
   --yelow-siafi: #f4c714;
+  --focus-primary: #00b0f4;
 
   --background-primary: linear-gradient(to top, #505285 0%, #b5aee4 100%);
   --background-primary-hover: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
@@ -52,7 +60,9 @@
   --background-secondary: linear-gradient(to right, #434343 0%, black 100%);
 }
 body {
-  font: 400 14px "Roboto", sans-serif;
+  font-family: Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 400;
+  font-size: 14px;
   background-image: url('./Assets/fund.png');
   background-repeat: repeat;
 
