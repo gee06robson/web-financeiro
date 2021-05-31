@@ -1,0 +1,160 @@
+.container-extract {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    padding: 10px;
+    background-color: var(--white);
+
+    overflow: auto;
+}
+
+
+.container-extract .content-extract {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.container-extract .content-extract  .card-extract {
+    width: 350px;
+    max-width: 350px;
+    min-width: 350px;
+
+    height: 450px;
+    max-height: 450px;
+    min-height: 450px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px 10px;
+    border-radius: 4px;
+    box-shadow: inset 
+    0 0 0 1px rgba(110, 134, 214, 0.8),
+    0 0 0 1px rgba(110, 134, 214, 0.1);
+  
+    background-color: var(--sistem);
+    border: 1px solid rgba(110, 134, 214, 0.1);
+    gap: 6px;
+
+    text-transform: uppercase;
+
+    position: relative;
+    cursor: pointer;
+}
+
+.container-extract .content-extract  .break {
+    display: none;
+}
+
+
+.container-extract .content-extract  .card-extract span {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    color: var(--chat-input);
+}
+
+.container-extract .content-extract  .card-extract .codigo {
+    margin-bottom: 10px;
+}
+
+.container-extract .content-extract  .card-extract .line-card {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dotted var(--primary);
+
+    padding: 2px 0;
+}
+
+.container-extract .content-extract  .card-extract table {
+    width: 100%;
+
+    text-align: left;
+    border: 1px dotted var(--primary);
+
+    color: var(--chat-input);
+}
+
+
+.container-extract .content-extract  .card-extract th, td {
+    border-bottom: 1px dotted var(--primary);
+
+    padding: 2px 0;
+}
+
+.container-extract .content-extract  .card-extract p {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    bottom: 4px;
+
+    color: var(--chat-input);
+}
+
+@media print {
+    * {
+        font-size: 16px;
+    }
+    body { background: none; }
+    @page{ size: A4 landscape; margin: auto 7mm; }
+    .container-extract {
+        overflow: unset;
+    }
+
+    .container-extract .content-extract {
+        gap: 2px;
+
+        height: 100vh;
+        justify-content: flex-start;
+    }
+    
+    .container-extract .content-extract .card-extract {
+        border-color: #000000;
+        border-style: dotted;
+        box-shadow: none;
+        border-width: 2px;
+        
+        border-radius: 0;
+
+        color: #000000;
+    }
+
+    .container-extract .content-extract  .break {
+        width: 100%;
+        display: block;
+        break-before: always;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: #FFFFFF;
+
+        padding: 20px 0;
+        margin: 46px 0;
+    }
+
+    .container-extract .content-extract .card-extract table {
+        border: 2px dotted #000000; 
+    }
+
+    .container-extract .content-extract  .card-extract th, td,
+    .container-extract .content-extract  .card-extract .line-card {
+        border-bottom: 2px dotted #000000;
+    }
+
+}
+

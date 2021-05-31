@@ -130,6 +130,11 @@
 
   color: var(--senary);
 }
+
+#update .content-form form .content-input #formInput input {
+  padding: 10px;
+  height: 40px;
+}
 #update .content-form form textarea:focus,
 #update .content-form form .content-input input:focus {
   border-color: rgba(var(--discor-rgba), .9);

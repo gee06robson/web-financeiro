@@ -67,24 +67,26 @@
 #auth .container .content .content-logo .sub-title,
 #auth .container .content form .sub-title {
   color: var(--text);
-  font-size: 16px;
   line-height: 20px;
   text-align: left;
-  font-weight: 400;
+  font-family: Whitney;
+  font-weight: 500;
+  font-size: 16px;
 
   margin-bottom: 15px;
 }
 
 #auth .container .content form .sub-title span {
   color: var(--error);
-  font-size: 12px;
   background-color: rgba(var(--error-rgba), 0.2);
-
+  
   padding: 2px 20px;
   border-radius: 12px;
   border: 1px solid rgba(var(--error-rgba), 0.4);
-
+  
+  font-family: Whitney;
   font-weight: bold;
+  font-size: 12px;
 }
 
 #auth .container .content form input {
@@ -96,12 +98,13 @@
 
   border-radius: 3px;
   box-sizing: border-box;
-  font-weight: 400;
-
+  
   transition: border-color .2s ease-in-out;
   letter-spacing: normal;
   text-rendering: optimizeLegibility;
-
+  
+  font-family: Whitney;
+  font-weight: 400;
   font-size: 16px;
 }
 
@@ -127,10 +130,12 @@
 
 #auth .container .content form a {
   color: var(--discord);
+  font-family: Whitney;
   font-weight: 500;
 }
 
 #auth .container .content form .register span {
+  font-family: Whitney;
   font-size: 14px;
   line-height: 16px;
 
@@ -142,21 +147,26 @@
   width: 100%;
   height: 44px;
 
-  font-size: 16px;
   line-height: 24px;
-
+  
   margin: 8px 0;
   box-sizing: border-box;
+
   font-weight: 500;
+  font-size: 16px;
   border: none;
-
+  
   padding: 2px 16px;
-
+  
   background-color: var(--bt-discord);
   color: var(--white);
-
+  
   border-radius: 3px;
   cursor: pointer;
+}
+
+#auth .container .content form button div {
+  font-family: Whitney;
 }
 
 #auth .container .content form button:hover {

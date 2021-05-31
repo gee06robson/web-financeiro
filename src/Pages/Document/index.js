@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import Notch from '../../Components/Notch'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import api from '../../Services/api'
 import { AiTwotonePlusCircle } from 'react-icons/ai'
 import { TiArrowLeftOutline } from 'react-icons/ti'
@@ -9,8 +9,10 @@ import FormInput from '../../Components/FormInput'
 import FormTextArea from '../../Components/TextArea'
 import SearchCreditor from '../../Components/Creditor'
 import { toConvert, dealWithData } from '../../Utils/dateFormat'
+import { dealWithToken } from '../../Utils/dealWithToken'
 import User from '../../Components/User'
 import { RotateSpinner } from "react-spinners-kit"
+import List from '../../Components/List'
 import './styles.css'
 
 
@@ -22,23 +24,33 @@ const Document = () => {
   const [formDocument, setFormDocument] = useState(false)
   const [count, setCount] = useState(0)
   const token = localStorage.getItem('token')
+  const unity = localStorage.getItem('code_unity')
   const history = useHistory()
+  const { code_list } = useParams()
 
   useEffect(() => {
-    api.get(`/document/${localStorage.getItem('code_unity')}`, { 
-      headers: { 
-        authorization: token 
-      }
-    }).then(response => {
-      setTimeout(() => {
-        setDocuments(response.data)
-        setLoading(false)
-      }, 1500)
-    }).catch(() => {
-      localStorage.removeItem('token')
-      history.push('/')
-    })
-  }, [token, formDocument, count, history])
+    setLoading(true)
+    if (code_list===undefined) {
+      api.get(`/document/${unity}`, dealWithToken(token)).then(response => {
+        setTimeout(() => {
+          setDocuments(response.data)
+          setLoading(false)
+        }, 1500)
+      }).catch(() => {
+        localStorage.removeItem('token')
+        history.push('/')
+      })
+    } else {
+      api.get(`/one_list/${unity}/${code_list}`, dealWithToken(token)).then(response => {
+        setTimeout(() => {
+          setDocuments(response.data.documents)
+          setLoading(false)
+        }, 1500)
+      }).catch(() => {
+        history.push('/')
+      })
+    }
+  }, [token, formDocument, count, history, unity, code_list])
 
   const { isSubmitting } = formState;
 
@@ -46,11 +58,7 @@ const Document = () => {
     setLoading(true)
     setResReq(false)
     await dealWithData(data).then(res => {
-      api.post('/document', res, {
-        headers: { 
-          authorization: token 
-        }
-      }).then(() => {
+      api.post(`/document/${code_list}`, res, dealWithToken(token)).then(() => {
         setTimeout(() => {
           setCount(count + 1)
           setFormDocument(false)
@@ -85,9 +93,29 @@ const Document = () => {
             <AiTwotonePlusCircle size={86} color="#2f3136" />
             <span>Novo Documento</span>
           </div>
+          <List />
         </div>
 
         <div className="documents">
+
+
+          <div className="header-list">
+            <div className="content-header-list">
+
+              <span>{code_list}</span>
+              <Link to="/newdocument" >Todos os Documentos</Link>
+
+              {code_list && 
+              <div className="data-list">
+                <Link to={`/extract/${code_list}`} >Editar</Link>
+                <Link to={`/extract/${code_list}`} >Extrato</Link>
+                <Link to={`/extract/${code_list}`} >P D F</Link>
+              </div>}
+
+            </div>
+          </div>
+          
+          <div className="content-document">
           {documents.map(document => (
             <div className="card-document" key={document.id}>
               <h1>{document.number}</h1>
@@ -98,7 +126,15 @@ const Document = () => {
               {document.due && <p><span>Vencimento</span>{toConvert(document.due)}</p> }
               <p><span>Valor</span>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(document.value)}</p>
               <Link to={`/update/${document.id}`}></Link>
+
+              <p><span>Descrição</span></p>
+              <div className="description">
+                <p>{document.description}</p>
+              </div>
+
             </div>))}
+          </div>
+
         </div>
 
         {loading && 
@@ -180,7 +216,7 @@ const Document = () => {
                 id="description"
                 label="Descrição"
                 readOnly={isSubmitting ? true : false }
-                register={register({ required: 'Informe a descrição do material ou serviço.' })}
+                register={register()}
                 errors={errors} />
 
             <button type="submit" disabled={loading} >{loading ? 'Carregando . . .':'CADASTRAR'}</button>

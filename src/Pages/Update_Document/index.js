@@ -132,7 +132,7 @@ const UpdateDocument = () => {
 
             <div className="menu-update">
               <div className="content">
-                <Link to="/newdocument"><div className="share" >Voltar</div></Link>
+                <div className="share" onClick={() => history.goBack()} >Voltar</div>
                 <div className="share" onClick={() => form === "update" ? setForm(false) : setForm("update")}>Editar</div>
                 <div className="share" onClick={() => form === "taxes"  ? setForm(false) : setForm("taxes")}>Receita</div>
               </div>
@@ -228,7 +228,7 @@ const UpdateDocument = () => {
               label="Descrição"
               defaultValue={document.description}
               readOnly={isSubmitting ? true : false }
-              register={register({ required: 'Informe a descrição do material ou serviço.' })}
+              register={register()}
               errors={errors} />
           <button type="submit" disabled={loading} >{loading ? 'Carregando . . .':'ALTERAR'}</button>
         </form>

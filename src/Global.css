@@ -11,7 +11,7 @@
   padding: 0;
   outline: 0;
   box-sizing: border-box;
-  font-family: Whitney;
+  font-family: "Roboto";
 }
 
 :root {
@@ -60,7 +60,8 @@
   --background-secondary: linear-gradient(to right, #434343 0%, black 100%);
 }
 body {
-  font-family: Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  /* font-family: Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif; */
+  font-family: "Roboto";
   font-weight: 400;
   font-size: 14px;
   background-image: url('./Assets/fund.png');

@@ -5,6 +5,7 @@ import Auth from './Pages/Auth'
 import Home from './Pages/Home'
 import Document from './Pages/Document'
 import UpdateDocument from './Pages/Update_Document'
+import Extract from './Pages/Extract'
 
 const Routes = () => {
   return (
@@ -17,8 +18,16 @@ const Routes = () => {
           <Home />
         </Route>
 
-        <Route path="/newdocument">
+        <Route path="/newdocument/" exact>
           <Document />
+        </Route>
+
+        <Route path="/newdocument/:code_list">
+          <Document />
+        </Route>
+
+        <Route path="/extract/:code_list">
+          <Extract />
         </Route>
 
         <Route path="/update/:id">

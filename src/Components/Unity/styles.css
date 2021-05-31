@@ -40,6 +40,8 @@
 
   border-radius: 3px;
   box-sizing: border-box;
+
+  font-family: Whitney;
   font-weight: 600;
   font-size: 12px;
 
@@ -53,6 +55,7 @@
 }
 
 #auth .container .content form #unity .react-select-container .react-select__control .react-select__single-value {
+  font-family: Whitney;
   color: var(--text);
 }
 

@@ -120,7 +120,7 @@
 
 #revenue .content-revenue form .content-form button {
   width: 100%;
-  height: 45px;
+  height: 40px;
 
   line-height: 24px;
   box-sizing: border-box;
@@ -130,8 +130,10 @@
 
   padding: 2px 16px;
 
-  background-image: var(--background-primary);
   color: var(--quinary);
+  background-color: rgba(var(--discor-rgba), 0.2);
+  border: 1px solid rgba(var(--discor-rgba), .34);
+
 
   text-transform: uppercase;
 
@@ -144,7 +146,7 @@
 }
 
 #revenue .content-revenue form .content-form button:hover {
-  color: var(--text);
+  color: var(--discord);
 }
 
 #revenue .content-revenue form .content-form button:disabled {
@@ -164,6 +166,11 @@
 #revenue .content-revenue form  .content-form #formInput input {
   margin: 0px;
   border-radius: 4px;
+
+  color: var(--primary);
+
+  padding: 10px;
+  height: 40px;
 }
 
 #revenue .content-revenue,
