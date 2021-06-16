@@ -84,7 +84,7 @@ const Auth = () => {
             </button>
             <div className="register">
               <span>Precisando de uma conta? </span>
-              <Link to="/">Cadastre-se</Link>
+              <Link to="/register">Cadastre-se</Link>
             </div> 
           </form>
 

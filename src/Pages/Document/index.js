@@ -3,31 +3,40 @@ import { useEffect, useState } from 'react'
 import Notch from '../../Components/Notch'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import api from '../../Services/api'
-import { AiTwotonePlusCircle } from 'react-icons/ai'
+import { AiTwotonePlusCircle, AiOutlineFullscreenExit } from 'react-icons/ai'
 import { TiArrowLeftOutline } from 'react-icons/ti'
 import FormInput from '../../Components/FormInput'
 import FormTextArea from '../../Components/TextArea'
 import SearchCreditor from '../../Components/Creditor'
-import { toConvert, dealWithData } from '../../Utils/dateFormat'
+import { toConvert, dealWithData, currencyFormat, SPMaskBehavior} from '../../Utils/dateFormat'
 import { dealWithToken } from '../../Utils/dealWithToken'
+import { Report } from '../../Utils/pdf'
 import User from '../../Components/User'
 import { RotateSpinner } from "react-spinners-kit"
 import List from '../../Components/List'
+import ListDocuments from '../../Components/ListDocuments'
+import SettingsList from '../../Components/Update_List'
+import DocumentSIAFI from '../../Components/DocumentSIAFI'
+import RemoveDocument from '../../Components/RemoveDocument'
+import $ from 'jquery'
 import './styles.css'
 
 
 const Document = () => {
   const [resReq, setResReq] = useState(false)
+  const [update, setUpdate] = useState(false)
   const [loading, setLoading] = useState(true)
   const { register, handleSubmit, errors, formState, reset } = useForm()
   const [documents, setDocuments] = useState([])
   const [formDocument, setFormDocument] = useState(false)
+  const [clickDocumentSIAFI, setClickDocumentSIAFI] = useState(false)
   const [count, setCount] = useState(0)
   const token = localStorage.getItem('token')
   const unity = localStorage.getItem('code_unity')
+  const [updateList, setUpdateList] = useState(0)
   const history = useHistory()
   const { code_list } = useParams()
-
+ 
   useEffect(() => {
     setLoading(true)
     if (code_list===undefined) {
@@ -35,7 +44,8 @@ const Document = () => {
         setTimeout(() => {
           setDocuments(response.data)
           setLoading(false)
-        }, 1500)
+          $('.code').mask(SPMaskBehavior)
+        }, 500)
       }).catch(() => {
         localStorage.removeItem('token')
         history.push('/')
@@ -45,12 +55,13 @@ const Document = () => {
         setTimeout(() => {
           setDocuments(response.data.documents)
           setLoading(false)
-        }, 1500)
+          $('.code').mask(SPMaskBehavior)
+        }, 500)
       }).catch(() => {
         history.push('/')
       })
     }
-  }, [token, formDocument, count, history, unity, code_list])
+  }, [token, formDocument, count, history, unity, code_list, updateList])
 
   const { isSubmitting } = formState;
 
@@ -62,7 +73,8 @@ const Document = () => {
         setTimeout(() => {
           setCount(count + 1)
           setFormDocument(false)
-        }, 2000)
+          setUpdateList(count + Math.floor(Math.random() * 10))
+        }, 200)
         reset()
       }).catch(err => {
         const { data } = err.response
@@ -93,23 +105,26 @@ const Document = () => {
             <AiTwotonePlusCircle size={86} color="#2f3136" />
             <span>Novo Documento</span>
           </div>
-          <List />
+          {code_list ? 
+          <ListDocuments setUpdateList={setUpdateList} updateList={updateList} /> :
+          <List setUpdateList={setUpdateList} updateList={updateList} />}
         </div>
 
         <div className="documents">
-
-
+          
           <div className="header-list">
             <div className="content-header-list">
 
+              <Link to="/newdocument">
+                {code_list && <TiArrowLeftOutline size={28} color="var(--focus-primary)" /> }
+              </Link>
               <span>{code_list}</span>
-              <Link to="/newdocument" >Todos os Documentos</Link>
 
               {code_list && 
               <div className="data-list">
-                <Link to={`/extract/${code_list}`} >Editar</Link>
-                <Link to={`/extract/${code_list}`} >Extrato</Link>
-                <Link to={`/extract/${code_list}`} >P D F</Link>
+                <span onClick={() => setUpdate(true)} >Editar</span>
+                <Link to={`/extract/${code_list}`} target="_blank" >Extrato</Link>
+                <span onClick={() => Report(code_list)} className="pdf" >P D F</span>
               </div>}
 
             </div>
@@ -118,19 +133,71 @@ const Document = () => {
           <div className="content-document">
           {documents.map(document => (
             <div className="card-document" key={document.id}>
-              <h1>{document.number}</h1>
-              <b>{document.creditor.reason}</b>
-              <b>{document.creditor.code}</b>
-              <p><span>Número</span>{document.number}</p>
-              <p><span>Emissão</span>{toConvert(document.emission)}</p>
-              {document.due && <p><span>Vencimento</span>{toConvert(document.due)}</p> }
-              <p><span>Valor</span>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(document.value)}</p>
-              <Link to={`/update/${document.id}`}></Link>
-
-              <p><span>Descrição</span></p>
-              <div className="description">
-                <p>{document.description}</p>
+              <div className="content-number">
+                <h1>{document.number}</h1>
               </div>
+
+              <div className="content-data-document">
+
+                <div className="content-creditor">
+                  <span>{document.creditor.reason}</span>
+                  <span className="code">{document.creditor.code}</span>
+                </div>
+
+                <div className="row">
+                  <span>Número</span>
+                  {document.number}
+                </div>
+
+                <div className="row">
+                  <span>Emissão</span>
+                  {toConvert(document.emission)}
+                </div>
+
+                {document.due && 
+                <div className="row">
+                  <span>Vencimento</span>
+                  {toConvert(document.due)}
+                </div>}
+
+                <div className="row">
+                  <span>Valor</span>
+                  {currencyFormat(document.value)}
+                </div>
+
+              </div>
+
+              <div className="content-description">
+                <span>Descrição</span>
+                <div className="description">
+                  <p>{document.description}</p>
+                </div>
+              </div>
+
+              <div className="cicle-document">
+                <Link to={`/update/${document.id}`}></Link>
+              </div>
+
+              <div className="cicle-plus">
+              {clickDocumentSIAFI ? 
+                <AiOutlineFullscreenExit size={23} onClick={() => clickDocumentSIAFI ? setClickDocumentSIAFI(false) : setClickDocumentSIAFI(true)} /> :
+                <AiTwotonePlusCircle size={23} onClick={() => clickDocumentSIAFI ? setClickDocumentSIAFI(false) : setClickDocumentSIAFI(true)} />
+              }
+              </div>
+
+              {code_list && 
+              <RemoveDocument 
+                code_list={code_list} 
+                id_document={document.id} 
+                setUpdateList={setUpdateList} />
+              }
+
+              {clickDocumentSIAFI &&
+              <DocumentSIAFI 
+                document_id={document.id} 
+                setUpdateList={setUpdateList}
+                updateList={updateList} />
+              }
 
             </div>))}
           </div>
@@ -224,6 +291,13 @@ const Document = () => {
           </form>
         </div>
       </div>}
+      { update &&
+        <SettingsList code_list={code_list} setUpdateList={setUpdateList} >
+          <button type="button" onClick={() => update ? setUpdate(false) : setUpdate(true)} >
+            <div>SAIR</div>
+          </button>
+        </SettingsList>
+      }
     </div>
   )
 }

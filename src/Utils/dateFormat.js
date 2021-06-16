@@ -29,18 +29,18 @@ dateFormat.i18n = {
     "Out",
     "Nov",
     "Dez",
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro",
+    "janeiro",
+    "fevereiro",
+    "março",
+    "abril",
+    "maio",
+    "junho",
+    "julho",
+    "agosto",
+    "setembro",
+    "outubro",
+    "novembro",
+    "dezembro",
   ],
   timeNames: ["a", "p", "am", "pm", "A", "P", "AM", "PM"],
 }
@@ -102,6 +102,13 @@ export const toConvert = (data) => {
     return ""
 }
 
+export const toTranslate = (data) => {
+  if (checkData(data))
+    return `Brasília, DF, ${dateFormat(data, "dd")} de ${dateFormat(data, "mmmm")} de ${dateFormat(data, "yyyy")}.`
+  else 
+    return ""
+}
+
 export const SPMaskBehavior = (val) => {
 
   val = val.replaceAll(/[^0-9]/g, "")
@@ -129,4 +136,15 @@ export const handleRetention = async (data) => {
   return data
 }
 
+export const currencyFormat = (value) => {
+  return Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)
+}
 
+export const truncate = (value) => {
+  if (value.length > 30) {
+    return value.substring(0, 30) + '...';
+  }
+  return value;
+}
+
+export const delay = (amount = 750) => new Promise(resolve => setTimeout(() => { return resolve } , amount))

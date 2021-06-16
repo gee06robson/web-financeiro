@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react'
 import { dealWithToken } from '../../Utils/dealWithToken'
 import { toConvert } from '../../Utils/dateFormat'
+import { styles } from '../../Utils/styles'
 import { Link, useParams } from 'react-router-dom'
 import { RotateSpinner } from 'react-spinners-kit'
+import { Scrollbars } from 'react-custom-scrollbars';
 import { HiLink } from 'react-icons/hi'
 import api from '../../Services/api'
 import './styles.css'
 
-const List = () => {
+const List = ({ setUpdateList }) => {
   const [list, setList] = useState([])
   const [count, setCount] = useState(0)
   const [loading, setLoading] = useState(true)
@@ -21,12 +23,12 @@ const List = () => {
       setTimeout(() => {
         setLoading(false)
         setList(response.data)
-      }, 1500)
+      }, 500)
     }).catch(err => {
       setLoading(false)
       console.log(err)
     })
-  }, [token, count, unity])
+  }, [token, count, unity, setUpdateList])
 
   const addList = async (code_unity) => {
     await api.post('/newlist', {
@@ -45,12 +47,14 @@ const List = () => {
         {loading ? <RotateSpinner size={18} color="var(--discord)" /> : <span>Listas</span> }
       </div>
 
+      <Scrollbars style={styles} autoHide >
       <div className="content-list">
         {list.map(list => (
           <div className={`card-list ${list.code_list===code_list && 'selected'}`} key={list.code_list} >
             <span>{list.code_list}</span>
             <span>{toConvert(list.createdAt)}</span>
-            <span>{list.linked_to ==="" ? 'documento não informado' : list.linked_to}</span>
+            <span><strong>REF - </strong>{list.linked_to ==="" ? 'documento não informado' : list.linked_to}</span>
+            {list.documents.length>0 && <i>{list.documents.length} documento{list.documents.length>1&&'s'}</i>}
 
             <div className="link">
               <Link to={`/newdocument/${list.code_list}`} >
@@ -61,8 +65,8 @@ const List = () => {
 
           </div>
         ))}
-        <span>-</span>
       </div>
+      </Scrollbars>
 
       <div className="content-button">
         <button type="button" onClick={() => addList(localStorage.getItem('code_unity'))} >

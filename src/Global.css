@@ -46,8 +46,10 @@
   --bt-discord: #4752c4;
   --text: #b9bbbe;
   --text-yelow: 244, 199, 20;
+  --text-link: hsl(197,calc(var(--saturation-factor, 1)*100%),47.8%);
   --text-normal: #dcddde;
   --channels-default: #8e9297;
+  --cream: #FEFAE3;
 
   --input: #EEE;
   --siafi: #29556F;

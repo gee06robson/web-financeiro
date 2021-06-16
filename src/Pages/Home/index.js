@@ -20,12 +20,6 @@ const Home = () => {
           <div className="header-body">
 
             <div className="link-header">
-              <DropDownMenu name="Credor">
-                <Link to="/newcreditor">
-                  <AiTwotonePlusCircle size={26} color="#F0F0F5" />
-                  <span>Novo Credor</span>
-                </Link>
-              </DropDownMenu>
               <DropDownMenu name="Documento">
                 <Link to="/newdocument" >
                   <AiTwotonePlusCircle size={26} color="#F0F0F5" />

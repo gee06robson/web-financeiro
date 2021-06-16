@@ -7,8 +7,15 @@
 
 #formTextArea label {
   width: 100%;
-  font-weight: 500;
-  color: var(--senary);
+  font-family: Whitney;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: var(--channels-default);
+  letter-spacing: normal;
+  
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 #formTextArea span {
@@ -20,7 +27,7 @@
   border: 2px solid rgba(var(--form), .1);
 	border-radius: 6px;
 	padding: 12px 15px;
-	margin: 8px 0;
+	margin: 2px 0;
   width: 100%;
   
   font-size: 14px;

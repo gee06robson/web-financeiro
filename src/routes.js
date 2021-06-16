@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Auth from './Pages/Auth'
+import Register from './Pages/Register'
 import Home from './Pages/Home'
 import Document from './Pages/Document'
 import UpdateDocument from './Pages/Update_Document'
@@ -16,6 +17,10 @@ const Routes = () => {
 
         <Route path="/home">
           <Home />
+        </Route>
+
+        <Route path="/register">
+          <Register />
         </Route>
 
         <Route path="/newdocument/" exact>

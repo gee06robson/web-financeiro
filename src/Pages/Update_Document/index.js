@@ -6,7 +6,7 @@ import FormInput from '../../Components/FormInput'
 import FormTextArea from '../../Components/TextArea'
 import { BsBoxArrowLeft } from 'react-icons/bs'
 import company from '../../Assets/company.png'
-import { toConvert, dealWithData, SPMaskBehavior } from '../../Utils/dateFormat'
+import { toConvert, dealWithData, SPMaskBehavior, currencyFormat } from '../../Utils/dateFormat'
 import { Revenue } from '../../Components/Revenue'
 import $ from 'jquery'
 import './styles.css'
@@ -56,7 +56,7 @@ const UpdateDocument = () => {
           setLoading(false)
           setCount(count + 1)
           setResUpdate('Alterações realizdas com sucesso')
-        }, 2000)
+        }, 500)
       }).catch(err => {
         const { data } = err.response
         setLoading(false)
@@ -127,7 +127,7 @@ const UpdateDocument = () => {
               <b>Vencimento</b> {toConvert(document.due)}
             </span>}
             <span>
-              <b>Valor</b> {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(document.value)}
+              <b>Valor</b> {currencyFormat(document.value)}
             </span>
 
             <div className="menu-update">
@@ -214,7 +214,7 @@ const UpdateDocument = () => {
               type="text" 
               name="value"
               label="Valor R$"
-              defaultValue={Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(document.value)}
+              defaultValue={document.value}
               readOnly={isSubmitting ? true : false }
               register={register({ required: 'Valor é abrigatório' })}
               errors={errors}

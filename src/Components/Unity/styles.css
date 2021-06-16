@@ -1,67 +1,7 @@
 #unity {
   display: flex;
-  width: 100% !important;
+  width: 100%;
 
   padding: 10px 0;
-}
-
-#unity .react-select-container {
-  width: 100%;
-  cursor: pointer !important;
-  
-}
-
-.react-select__value-container,
-.react-select__indicators {
-  cursor: pointer;
-  text-transform: uppercase;
-}
-
-#unity .react-select-container .react-select__menu .react-select__menu-list {
-  padding: 4px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px
-}
-
-#unity .react-select-container .react-select__menu .react-select__menu-list .react-select__option {
-  border-radius: 4px;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-family: 'Roboto';
-  font-weight: bold;
-  color: var(--primary);
-}
-
-#auth .container .content form #unity .react-select-container .react-select__control {
-  background-color: rgba(0, 0, 0, .1);
-  border: 1px solid rgba(0, 0, 0, .3);
-  color: var(--text);
-
-  border-radius: 3px;
-  box-sizing: border-box;
-
-  font-family: Whitney;
   font-weight: 600;
-  font-size: 12px;
-
-  box-shadow: none;
-  height: 43px;
-  transition: border-color .2s ease-in-out;
-}
-
-#auth .container .content form #unity .react-select-container .react-select__control:hover {
-  border-color: var(--focus-primary);
-}
-
-#auth .container .content form #unity .react-select-container .react-select__control .react-select__single-value {
-  font-family: Whitney;
-  color: var(--text);
-}
-
-@media only screen and (max-width: 800px) {
-  #auth .container .content form #unity .react-select-container .react-select__control,
-  #auth .container .content form #unity .react-select-container .react-select__control .react-select__single-value {
-    color: var(--primary);
-  }
 }

@@ -29,7 +29,7 @@ export const Revenue = () => {
         setLoading(false)
         setDocument([res.data])
         $('.money').unmask()
-      }, 1500)
+      }, 500)
     }).catch(err => {
       const { data } = err.response
       console.log(data.error)
